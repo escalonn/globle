@@ -5,6 +5,9 @@ import App from "./App";
 import { ThemeProvider } from "./context/ThemeContext";
 import LocaleProvider from "./i18n";
 import BodyStyle from "./components/BodyStyle";
+import { outputInfo } from "./sandbox";
+
+outputInfo();
 
 ReactDOM.render(
   <React.StrictMode>

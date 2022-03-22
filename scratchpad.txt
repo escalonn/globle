@@ -1,0 +1,194 @@
+9 colors: Russia, max 5 guesses, average 3.756 guesses (~25 s)
+    8: Latvia      (12 options: max 3 guesses, avg 2.33)  (/Finland/Belarus)
+    7: Armenia     (14 options: max 3 guesses, avg 2.43)  (/Turkmenistan/Iran)
+    6: Montenegro  (31 options: max 4 guesses, avg 3.13)
+    5: Luxembourg  (32 options: max 4 guesses, avg 2.78)
+    4: Uganda      (28 options: max 4 guesses, avg 2.64)
+    3: Mozambique  (40 options: max 4 guesses, avg 2.8 )
+    2: Guatemala   (33 options: max 4 guesses, avg 2.94)
+    1: Uruguay     ( 6 options: max 3 guesses, avg 2   )  (/Peru)
+
+
+output kilometer distance breakpoints for color scheme
+
+
+awkward situations
+    e.g. from Russia->Guatemala, Saint Lucia and Grenada have different indices despite being very close.
+    the tree forks at that choice despite it being hard for a human to tell the difference.
+what if we generated new possibility sets from a guess, not by precomputed globally-aligned color indices,
+    but by dividing the spectrum
+the problem with this is we could easily explode the number of possible states.
+    as is, one guess can have 9 possible outcomes, any answer in one of the 9 buckets
+        is treated identically.
+    with this new idea, i guess there's no way around it, one guess either has almost one outcome per possible answer
+        (as a set of countries with a CLOSE ENOUGH color to the exact correct answer - window edges move slightly as the answer moves)
+        if i pursued this option, i think i'd have to aggressively prune choices that fail some heuristic
+        if i did it this way, my whole iteration order might change...
+            for each answer..
+                the first possibility set is all countries
+                evaluate the set. to evaluate a set:
+                    for each possible guess in a set..
+                        if it wasn't correct,
+                        get the set of countries close enough in color to the observed color of the guess
+                        that is the new possibility set, evaluate it
+                        calculate whatever needed stats/score along the way (?)
+            to make the comparisons quicker, maybe i should precompute transform the set of colors to something quicker to compare like a scale of integers
+    or i guess maybe we could just quantize the spectrum differently for each answer.
+        like dividing "#### #  ###     ##" in the biggest gap rather than in the middle of the ###.
+            the problem with this idea is that that biggest gap is a product of all the guesses made so far,
+            can't be precomputed once for each country
+        so, for each country, get the sorted list of all exact colors (or just sqrt distances?) from that country,
+        and divide it in buckets based on minimizing some score. roughly 9 buckets?
+        the idea as stated won't work, but something similar may work
+
+
+global function to easily compare distance of two countries
+global function to convert any name of a country (searching) to its flag, use this for other global function inputs, allow lowercase
+
+consider dividing the continuous version of the color scheme more correctly into equally perceptually distinct colors.
+and try more than 9?
+interpolated is worse than scheme in results, and seems less perceptually uniform
+
+get the small jsons loaded by the client with fetch?
+
+
+a state is a set of possibilities
+    e.g. ABCD
+a state's score represents (1) the number of guesses required, given perfect play, given the worst-case answer,
+    and (2) secondarily, the expected value of guesses required, given perfect play, across all possible answers
+    e.g. ABCD = [2, 1.75]
+a state's best guesses is the set of guesses that equivalently represent perfect play from this state
+    taking into account EV to break ties on minimax
+evaluate the initial state (all)
+to evaluate a state:
+    for each guess (from this state),
+        for each possible answer (from this state),
+            if it's a win,
+                base case, score is 0.
+            otherwise, a new state is generated (filter), evaluate it, it has a score.
+            keep track of the maximum score from among the possible answers given this guess.
+            also keep track of the average score from among the possible answers given this guess.
+        keep track of which guess(es) have the minimum of those maximum scores, breaking ties with the average
+    add 1 to that minimum and to that average, that is this state's score.
+    those guesses are this state's best guesses.
+
+---
+
+ME, SI, RS
+^ something wrong with this one, gets score of 1
+^ fixed
+
+now, make score a tuple of [minimax, expected-value].
+^ done
+
+add global(?) functions to produce best moves for specific guesses&colors
+    and to produce list of possibilities for one guess and color
+^ done
+
+add global function to play game from a starting state
+^ done
+
+---
+
+    for each answer,
+        for each set of possibilities,
+            generate child states for each guess
+            worst case child state + 1 is this guess's worst case (this works(?) for AB, AC, BC)
+                but if a previous ANSWER's worst case for this
+
+
+
+num_colors (max guesses)
+9 (5)
+    [
+        "Armenia",
+        "Austria",
+        "Azerbaijan",
+        "Belarus",
+        "Bosnia and Herz.",
+        "China",
+        "Croatia",
+        "Czechia",
+        "Hungary",
+        "Iran",
+        "Iraq",
+        "Kenya",
+        "Latvia",
+        "Liechtenstein",
+        "Lithuania",
+        "Norway",
+        "Poland",
+        "Russia",
+        "San Marino",
+        "Serbia",
+        "Slovakia",
+        "Slovenia",
+        "Spain",
+        "Turkmenistan",
+        "Uganda",
+        "Ukraine",
+        "Uzbekistan",
+        "Vatican"
+    ]
+8 (6)
+    [
+        "Belgium",
+        "Ecuador",
+        "Finland",
+        "Georgia",
+        "Hungary",
+        "Ireland",
+        "Luxembourg",
+        "Mali",
+        "Sudan",
+        "São Tomé and Principe",
+        "Turkey",
+        "Uganda",
+        "United Kingdom"
+    ]
+7 (6)
+    [
+        "Belgium",
+        "Finland",
+        "Georgia",
+        "Hungary",
+        "Ireland",
+        "Luxembourg",
+        "Mali",
+        "Sudan",
+        "São Tomé and Principe",
+        "Turkey",
+        "Uganda",
+        "United Kingdom"
+    ]
+6 (7)
+    [
+        "Belgium",
+        "France",
+        "Netherlands",
+        "Russia",
+        "Turkmenistan"
+    ]
+
+for each answer of 197
+    for each possible first guess, the possible remaining
+        for each possible remaining, the further remaining when it is guessed
+            gather all these in a global list of game states. the state is just the set of possible remaining
+for each game state
+
+should i...
+    for each answer, assume perfect play and ... i don't think that makes sense
+
+
+9 colors: Russia, max 5 guesses, average 3.746 guesses (~50 s)
+    8: Lithuania   (14 options: max 3 guesses, avg 2.43)  (/Ukraine/Poland/Latvia)
+    7: Denmark     (16 options: max 3 guesses, avg 2.44)  (/Germany/Iran)
+    6: Montenegro  (35 options: max 4 guesses, avg 3.17)
+    5: Spain       (26 options: max 3 guesses, avg 2.62)
+    4: Uganda      (26 options: max 4 guesses, avg 2.62)
+    3: Mozambique  (40 options: max 4 guesses, avg 2.6 )
+    2: Guatemala   (33 options: max 4 guesses, avg 2.94)
+    1: Uruguay     ( 6 options: max 3 guesses, avg 2   )  (/Peru)
+8 colors: Turkey, max 6 guesses, average 4.107 guesses (~70 s)
+7 colors: Turkey, max 6 guesses, average 4.142 guesses (~70 s)
+6 colors: Russia, max 7 guesses, average 4.503 guesses (~650+ s)
