@@ -1,16 +1,17 @@
 9 colors: Russia, max 5 guesses, average 3.756 guesses (~25 s)
-    8: Latvia      (12 options: max 3 guesses, avg 2.33)  (/Finland/Belarus)
-    7: Armenia     (14 options: max 3 guesses, avg 2.43)  (/Turkmenistan/Iran)
-    6: Montenegro  (31 options: max 4 guesses, avg 3.13)
-    5: Luxembourg  (32 options: max 4 guesses, avg 2.78)
-    4: Uganda      (28 options: max 4 guesses, avg 2.64)
-    3: Mozambique  (40 options: max 4 guesses, avg 2.8 )
-    2: Guatemala   (33 options: max 4 guesses, avg 2.94)
-    1: Uruguay     ( 6 options: max 3 guesses, avg 2   )  (/Peru)
+    8 (<50):    Latvia      (12 options: max 3 guesses, avg 2.33)  (/Finland/Belarus)
+    7 (<500):   Armenia     (14 options: max 3 guesses, avg 2.43)  (/Turkmenistan/Iran)
+    6 (<1500):  Montenegro  (31 options: max 4 guesses, avg 3.13)
+    5 (<3000):  Luxembourg  (32 options: max 4 guesses, avg 2.78)
+    4 (<5000):  Uganda      (28 options: max 4 guesses, avg 2.64)
+    3 (<7500):  Mozambique  (40 options: max 4 guesses, avg 2.8 )
+    2 (<10000): Guatemala   (33 options: max 4 guesses, avg 2.94)
+    1 (<13000): Uruguay     ( 6 options: max 3 guesses, avg 2   )  (/Peru)
 
+consider redefining the color scheme based on round number kilometers and skipping the color distance part altogether
 
 output kilometer distance breakpoints for color scheme
-
+    done, but do it better with the actual range?
 
 awkward situations
     e.g. from Russia->Guatemala, Saint Lucia and Grenada have different indices despite being very close.
