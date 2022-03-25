@@ -11,7 +11,7 @@ interface CountryDistances {
 }
 
 export interface CountryColors {
-  colorScheme: { color: string, cutoff: number }[];
+  colorScheme: { color: string, cutoff: [number, number] }[];
   countries: {
     [c1: string]: {
       name: string;
@@ -201,9 +201,9 @@ export async function outputInfo() {
 globalThis.showColorScheme = () => {
   console.log('color index reference:');
   for (let i = 0; i < colorScheme.length; i++) {
-    const km = Math.round(countryColors.colorScheme[i].cutoff);
+    const km = countryColors.colorScheme[i].cutoff;
     console.log(
-      `%c    ${i} (${String(km).padStart(5)})    `,
+      `%c    ${i} (${String(km[0]).padStart(5)}-${String(km[1]).padStart(5)})    `,
       `color: black; background-color: ${colorScheme[i]}`
     );
   }
@@ -302,7 +302,7 @@ function computePartitionedColors() {
   console.time('compute country color indices');
   colorIndices = {};
   countryColors = {
-    colorScheme: colorScheme.map(c => ({ color: c, cutoff: -1 })),
+    colorScheme: colorScheme.map(c => ({ color: c, cutoff: [-1, -1] })),
     countries: colorIndices
   };
   const nameToFlag = new Map();
@@ -359,12 +359,15 @@ function computePartitionedColors() {
     //   list.sort();
     // }
   }
-  for (let i = 0; i < schemeColors.length - 1; i++) {
-    const lighter = minMaxDistanceByIndex.get(i);
-    const darker = minMaxDistanceByIndex.get(i + 1);
-    countryColors.colorScheme[i].cutoff = (lighter.min + darker.max) / 2 / 1000;
+  for (let i = 0; i < schemeColors.length; i++) {
+    const distances = minMaxDistanceByIndex.get(i);
+    const pair = [distances.min, distances.max].map(x => Math.round(x / 1000));
+    // const lighter = minMaxDistanceByIndex.get(i);
+    // const darker = minMaxDistanceByIndex.get(i + 1);
+    // countryColors.colorScheme[i].cutoff = (lighter.min + darker.max) / 2 / 1000;
+    countryColors.colorScheme[i].cutoff = pair as [number, number];
   }
-  countryColors.colorScheme[schemeColors.length - 1].cutoff = 0;
+  // countryColors.colorScheme[schemeColors.length - 1].cutoff = 0;
 
   console.timeEnd('compute country color indices');
 

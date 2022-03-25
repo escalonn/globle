@@ -1,14 +1,14 @@
 {
   "colorScheme": [
-    { "color": "#fff7ec", "cutoff": 13341.198518635136 },
-    { "color": "#fee8c8", "cutoff": 10010.833000724195 },
-    { "color": "#fdd49e", "cutoff": 7240.055304809425 },
-    { "color": "#fdbb84", "cutoff": 4836.394352951839 },
-    { "color": "#fc8d59", "cutoff": 2896.129769494781 },
-    { "color": "#ef6548", "cutoff": 1492.2816231934398 },
-    { "color": "#d7301f", "cutoff": 568.9055803273864 },
-    { "color": "#b30000", "cutoff": 56.21973949100907 },
-    { "color": "#7f0000", "cutoff": 0 }
+    { "color": "#fff7ec", "cutoff": [13343, 19665] },
+    { "color": "#fee8c8", "cutoff": [10011, 13339] },
+    { "color": "#fdd49e", "cutoff": [7241, 10010] },
+    { "color": "#fdbb84", "cutoff": [4837, 7239] },
+    { "color": "#fc8d59", "cutoff": [2897, 4836] },
+    { "color": "#ef6548", "cutoff": [1493, 2896] },
+    { "color": "#d7301f", "cutoff": [569, 1492] },
+    { "color": "#b30000", "cutoff": [59, 568] },
+    { "color": "#7f0000", "cutoff": [0, 54] }
   ],
   "countries": {
     "MA": {
