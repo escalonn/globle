@@ -21,6 +21,7 @@
     "react-globe.gl": "^2.20.1",
     "react-intl": "^5.24.7",
     "react-scripts": "5.0.0",
+    "serve": "^13.0.2",
     "spherical-geometry-js": "^3.0.0",
     "typescript": "^4.5.4",
     "web-vitals": "^2.1.3"
@@ -32,7 +33,8 @@
     "eject": "react-scripts eject",
     "ts": "tsc -w",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "style-check": "npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch"
+    "style-check": "npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
