@@ -8,6 +8,9 @@
     2 (<10000): Guatemala   (33 options: max 4 guesses, avg 2.94)
     1 (<13000): Uruguay     ( 6 options: max 3 guesses, avg 2   )  (/Peru)
 
+write code to display the borders removed at a distance literally on the globe
+it would be dope
+
 consider redefining the color scheme based on round number kilometers and skipping the color distance part altogether
 
 output kilometer distance breakpoints for color scheme
