@@ -10,6 +10,17 @@
 
 write code to display the borders removed at a distance literally on the globe
 it would be dope
+    this seems pretty hard!
+    for distance X, on the plane, you have to make a voronoi diagram for the points of the country geometry
+        then, for each point and its voronoi polygon - intersect the polygon with the circle on the point with radius X.
+        could be 0, 1, or multiple arcs of that circle. those arcs are part of the path to draw!
+            (a voronoi diagram works because, according to this paper https://www2.cs.sfu.ca/~binay/2016/813/LaguerreGeometry.pdf,
+            finding the contour of the union of n given circles in the plane just means taking the power diagram for those circles
+            and intersecting each polygon with its circle. but if the radii are all equal, the power diagram is the voronoi diagram.)
+    but this is on the sphere...
+        scipy has code for that, but does anything in npm?
+    note that, yes, globle treats the earth as a sphere (& coordinates are lat,long),
+        and the drawn outline doesn't necessarily correspond exactly to the points in country_data.
 
 improve the workflow for regenerating everything based on a change to the distance code/data.
     (right now... commenting out await setup(), switching the distances assignment to = {}, and deleting the country_colors color scheme)
