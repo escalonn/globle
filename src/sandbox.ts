@@ -3,6 +3,7 @@ import { interpolateOrRd, schemeOrRd } from 'd3-scale-chromatic';
 import { color } from 'd3-color';
 import { differenceCiede2000 } from 'd3-color-difference';
 import { polygonDistance } from './util/distance';
+// import { generateKeyNew } from './util/answer';
 
 interface CountryDistances {
   [c1: string]: {
@@ -44,9 +45,26 @@ const flagToName = new Map<string, string>();
 const nameToFlag = new Map<string, string>();
 
 for (const country of countryData) {
+  // console.log(country.properties.FLAG[1], country.properties.NAME);
   flagToName.set(country.properties.FLAG, country.properties.NAME);
   nameToFlag.set(country.properties.NAME, country.properties.FLAG);
 }
+
+// countryData.sort((a, b) => {
+//   return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);
+// });
+
+// const nums = [];
+// const date = new Date();
+// date.setDate(date.getDate() - 200);
+// for (let i = 0; i < 500; i++) {
+//   const dateStr = date.toLocaleDateString("en-CA");
+//   const key = generateKeyNew(countryData, dateStr);
+//   // console.log(dateStr, countryData[key].properties.NAME);
+//   nums.push(key);
+//   date.setDate(date.getDate() + 1);
+// }
+// console.log(nums.join('\n'));
 
 export class GameState {
   bestGuesses?: string[];
