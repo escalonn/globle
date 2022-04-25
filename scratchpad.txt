@@ -17,13 +17,18 @@ it would be dope
             (a voronoi diagram works because, according to this paper https://www2.cs.sfu.ca/~binay/2016/813/LaguerreGeometry.pdf,
             finding the contour of the union of n given circles in the plane just means taking the power diagram for those circles
             and intersecting each polygon with its circle. but if the radii are all equal, the power diagram is the voronoi diagram.)
+            cf. picture saved at ~/Documents/thinking-about-voronoi.png
     but this is on the sphere...
         scipy has code for that, but does anything in npm?
     note that, yes, globle treats the earth as a sphere (& coordinates are lat,long),
         and the drawn outline doesn't necessarily correspond exactly to the points in country_data.
 
 improve the workflow for regenerating everything based on a change to the distance code/data.
-    (right now... commenting out await setup(), switching the distances assignment to = {}, and deleting the country_colors color scheme)
+    (right now... commenting out await setup(), switching the distances assignment to = {}, and deleting the country_colors color scheme
+    then, ctrl+c the run so it doesn't refresh, copy distances and colors to src,
+    put map into global, console.log(JSON.stringify(Object.fromEntries(temp1))),
+    copy to public/data. then run x = getNextGameState(initialState, 'Russia', _)
+    and flagsToNames(...x.bestGuesses) few times.
 
 consider redefining the color scheme based on round number kilometers and skipping the color distance part altogether
 
