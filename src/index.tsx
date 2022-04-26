@@ -5,6 +5,7 @@ import App from "./App";
 import { ThemeProvider } from "./context/ThemeContext";
 import LocaleProvider from "./i18n";
 import BodyStyle from "./components/BodyStyle";
+import { BrowserRouter } from "react-router-dom";
 import { outputInfo } from "./sandbox";
 
 outputInfo();
@@ -13,8 +14,10 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
       <LocaleProvider>
-        <App />
-        <BodyStyle />
+        <BrowserRouter>
+          <App />
+          <BodyStyle />
+        </BrowserRouter>
       </LocaleProvider>
     </ThemeProvider>
   </React.StrictMode>,
