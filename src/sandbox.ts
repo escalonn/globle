@@ -54,17 +54,17 @@ for (const country of countryData) {
 //   return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);
 // });
 
-// const nums = [];
+// // const nums = [];
 // const date = new Date();
-// date.setDate(date.getDate() - 200);
-// for (let i = 0; i < 500; i++) {
+// date.setDate(date.getDate());
+// for (let i = 0; i < 150; i++) {
 //   const dateStr = date.toLocaleDateString("en-CA");
 //   const key = generateKeyNew(countryData, dateStr);
-//   // console.log(dateStr, countryData[key].properties.NAME);
-//   nums.push(key);
-//   date.setDate(date.getDate() + 1);
+//   console.log(dateStr, countryData[key].properties.NAME);
+//   // nums.push(key);
+//   date.setDate(date.getDate() - 1);
 // }
-// console.log(nums.join('\n'));
+// // console.log(nums.join('\n'));
 
 export class GameState {
   bestGuesses?: string[];

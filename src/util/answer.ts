@@ -9,12 +9,14 @@ countryData.sort((a, b) => {
   return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);
 });
 
+// this behavior changed on 2022-02-16
 export function generateKeyNew(list: any[], day: string) {
   const [year, month, date] = day.split("-");
   // dayCode goes up by 86_400_000 every day at client-side midnight.
   // (no precision problems for the next 300k years, cf. MAX_SAFE_INTEGER)
   const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
-  const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1"; // "1337";
+  // const SHUFFLE_KEY = "1337";
+  const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
   // the quotient of dayCode divided by 13375, modulo 197 (number of countries)
   const key = Math.floor(dayCode / parseInt(SHUFFLE_KEY + "5")) % list.length;
   // the ratio goes up by 6459 + 87/107 every day,
